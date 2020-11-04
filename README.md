@@ -2,47 +2,66 @@
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-| birthday | string | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| birthday           | date   | null: false |
+| nickname           | string | null: false |
+
+### Association
+- has_one :items_history
+- has_one :item, through: items_history
 
 ## items テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | -----------| ------------------------------ |
 | name       | string     | null: false                    |
-| user_id    | references | null: false, foreign_key: true |
-| info       | string     | null: false                    |
-| category   | string     | null: false                    |
-| sales      | string     | null: false                    |
-| shippings  | string     | null: false                    |
-| prefecture | string     | null: false                    |
-| scheduled  | string     | null: false                    |
-| price      | string     | null: false                    |
+| user       | references | null: false, foreign_key: true |
+| info       | text       | null: false                    |
+| category   | integer    | null: false                    |
+| sales      | integer    | null: false                    |
+| shippings  | integer    | null: false                    |
+| prefecture | integer    | null: false                    |
+| scheduled  | integer    | null: false                    |
+| price      | integer    | null: false                    |
 
-## transactions テーブル
+### Association
+
+- belongs_to :items_history
+
+## items_histories テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | -----------| ------------------------------ |
-| number       | string     | null: false                    |
-| exp-month    | string     | null: false                    |
-| exp-year     | string     | null: false                    |
-| cvc          | string     | null: false                    |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+
+### Association
+
+-belongs_to :user
+-has_one :item
+-has_one :shipping
+
 
 ## shippings テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | -----------| ------------------------------ |
 | postal-code  | string     | null: false                    |
-| prefecture   | string     | null: false                    |
+| prefecture   | integer    | null: false                    |
 | city         | string     | null: false                    |
 | address      | string     | null: false                    |
 | building     | string     |                                |
 | phone-number | string     | null: false                    |
-| user_id      | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+
+### Association
+
+-belongs_to :items_history
 
 
 This README would normally document whatever steps are necessary to get the

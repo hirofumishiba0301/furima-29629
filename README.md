@@ -11,28 +11,28 @@
 | nickname           | string | null: false |
 
 ### Association
-- has_one :items_history
-- has_one :item, through: items_history
+- has_many :transactions
+- has_many :items, through: transactions
 
 ## items テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | -----------| ------------------------------ |
-| name       | string     | null: false                    |
-| user       | references | null: false, foreign_key: true |
-| info       | text       | null: false                    |
-| category   | integer    | null: false                    |
-| sales      | integer    | null: false                    |
-| shippings  | integer    | null: false                    |
-| prefecture | integer    | null: false                    |
-| scheduled  | integer    | null: false                    |
-| price      | integer    | null: false                    |
+| Column        | Type       | Options                        |
+| ------------- | -----------| ------------------------------ |
+| name          | string     | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| info          | text       | null: false                    |
+| category_id   | integer    | null: false                    |
+| sales_id      | integer    | null: false                    |
+| shippings_id  | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| scheduled_id  | integer    | null: false                    |
+| price         | integer    | null: false                    |
 
 ### Association
+- belongs_to :user
+- has_one :transaction
 
-- belongs_to :items_history
-
-## items_histories テーブル
+## transactions テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | -----------| ------------------------------ |
@@ -42,22 +42,22 @@
 ### Association
 
 -belongs_to :user
--has_one :item
+-belongs_to :item
 -has_one :shipping
 
 
 ## shippings テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | -----------| ------------------------------ |
-| postal-code  | string     | null: false                    |
-| prefecture   | integer    | null: false                    |
-| city         | string     | null: false                    |
-| address      | string     | null: false                    |
-| building     | string     |                                |
-| phone-number | string     | null: false                    |
-| user         | references | null: false, foreign_key: true |
-| item         | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | -----------| ------------------------------ |
+| postal-code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| address       | string     | null: false                    |
+| building      | string     |                                |
+| phone-number  | string     | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
 
 ### Association
 

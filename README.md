@@ -4,15 +4,18 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| name               | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
 | birthday           | date   | null: false |
 | nickname           | string | null: false |
+| last-name          | string | null: false |
+| first-name         | string | null: false |
+| last-name-kana     | string | null: false |
+| first-name-kana    | string | null: false |
 
 ### Association
 - has_many :transactions
-- has_many :items, through: transactions
+- has_many :items
 
 ## items テーブル
 
@@ -56,12 +59,11 @@
 | address       | string     | null: false                    |
 | building      | string     |                                |
 | phone-number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| transaction   | references | null: false, foreign_key: true |
 
 ### Association
 
--belongs_to :items_history
+-belongs_to :transaction
 
 
 This README would normally document whatever steps are necessary to get the

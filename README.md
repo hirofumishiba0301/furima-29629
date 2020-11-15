@@ -14,7 +14,7 @@
 | first-name-kana    | string | null: false |
 
 ### Association
-- has_many :transactions
+- has_many :orders
 - has_many :items
 
 ## items テーブル
@@ -33,9 +33,9 @@
 
 ### Association
 - belongs_to :user
-- has_one :transaction
+- has_one :order
 
-## transactions テーブル
+## orders テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | -----------| ------------------------------ |
@@ -63,7 +63,7 @@
 
 ### Association
 
--belongs_to :transaction
+-belongs_to :order
 
 
 This README would normally document whatever steps are necessary to get the

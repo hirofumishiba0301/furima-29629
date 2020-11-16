@@ -1,10 +1,11 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   belongs_to_active_hash :category
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :sale
   belongs_to_active_hash :scheduled
-  belongs_to_active_hash :shippin
+  belongs_to_active_hash :shipping
 
   validates :name, presence: true
   validates :info, presence: true

@@ -46,6 +46,36 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
     end
 
+    it 'category_idが空では登録できない' do
+      @item.category_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
+
+    it 'sale_idが空では登録できない' do
+      @item.sale_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Sale can't be blank")
+    end
+
+    it 'prefecture_idが空では登録できない' do
+      @item.prefecture_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+    end
+
+    it 'scheduled_idが空では登録できない' do
+      @item.scheduled_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Scheduled can't be blank")
+    end
+
+    it 'shipping_idが空では登録できない' do
+      @item.shipping_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Shipping can't be blank")
+    end
+
     it 'category_idが1では登録できない' do
       @item.category_id = 1
       @item.valid?

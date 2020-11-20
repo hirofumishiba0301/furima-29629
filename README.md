@@ -14,7 +14,7 @@
 | first-name-kana    | string | null: false |
 
 ### Association
-- has_many :transactions
+- has_many :orders
 - has_many :items
 
 ## items テーブル
@@ -22,25 +22,25 @@
 | Column        | Type       | Options                        |
 | ------------- | -----------| ------------------------------ |
 | name          | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| user          | references | foreign_key: true              |
 | info          | text       | null: false                    |
 | category_id   | integer    | null: false                    |
-| sales_id      | integer    | null: false                    |
-| shippings_id  | integer    | null: false                    |
+| sale_id       | integer    | null: false                    |
+| shipping_id   | integer    | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | scheduled_id  | integer    | null: false                    |
 | price         | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
-- has_one :transaction
+- has_one :order
 
-## transactions テーブル
+## orders テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | -----------| ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| item         | references | null: false, foreign_key: true |
+| Column       | Type       | Options           |
+| ------------ | -----------| ----------------- |
+| user         | references | foreign_key: true |
+| item         | references | foreign_key: true |
 
 ### Association
 
@@ -59,11 +59,11 @@
 | address       | string     | null: false                    |
 | building      | string     |                                |
 | phone-number  | string     | null: false                    |
-| transaction   | references | null: false, foreign_key: true |
+| order         | references | foreign_key: true              |
 
 ### Association
 
--belongs_to :transaction
+-belongs_to :order
 
 
 This README would normally document whatever steps are necessary to get the

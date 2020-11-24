@@ -39,10 +39,9 @@ class ItemsController < ApplicationController
       @item.destroy
       redirect_to root_path
     else
-      redirect_to item_path, method: :get 
+      redirect_to item_path, method: :get
     end
   end
-
 
   private
 

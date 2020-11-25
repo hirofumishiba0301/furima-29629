@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to item_path, method: :get unless @item.user_id == current_user.id
+    redirect_to item_path unless @item.user_id == current_user.id
   end
 
   def update
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
       @item.destroy
       redirect_to root_path
     else
-      redirect_to item_path, method: :get
+      redirect_to item_path
     end
   end
 

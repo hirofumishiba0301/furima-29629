@@ -50,16 +50,16 @@
 -has_one :shipping
 
 
-## shippings テーブル
+## ships テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | -----------| ------------------------------ |
-| postal-code   | string     | null: false                    |
+| postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address       | string     | null: false                    |
 | building      | string     |                                |
-| phone-number  | string     | null: false                    |
+| phone_number  | string     | null: false                    |
 | order         | references | foreign_key: true              |
 
 ### Association

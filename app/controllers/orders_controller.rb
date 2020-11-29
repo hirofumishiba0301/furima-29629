@@ -7,7 +7,12 @@ class OrdersController < ApplicationController
     @order_ship = OrderShip.new
   end
 
+  def new
+    @order_ship = OrgerShip.new
+  end
+
   def create
+    binding.pry
     @item = Item.find(params[:item_id])
     @order_ship = OrderShip.new(order_ship_params)
     if @order_ship.valid?
@@ -21,7 +26,7 @@ class OrdersController < ApplicationController
   private
 
   def order_ship_params
-    params.require(:order_ship).permit(:price, :postal_code, :prefecture_id, :city, :address, :building, :phone_number)
+    params.require(:order_ship).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
 end

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     if !user_signed_in?
       redirect_to root_path
-    elsif @item.user_id == current_user.id or @item.order.present?
+    elsif (@item.user_id == current_user.id) || @item.order.present?
       redirect_to root_path
     else
       @order_ship = OrderShip.new
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: order_ship_params[:price],
       card: order_ship_params[:token],

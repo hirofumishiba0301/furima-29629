@@ -5,5 +5,7 @@ FactoryBot.define do
     city{'港区'}
     prefecture_id{2}
     phone_number{'09077777777'}
+    price{3000}
+    token{"tok_abcdefghijk00000000000000000"}
   end
 end

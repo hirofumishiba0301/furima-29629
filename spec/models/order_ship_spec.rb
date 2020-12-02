@@ -10,6 +10,18 @@ RSpec.describe OrderShip, type: :model do
       expect(@order_ship).to be_valid
     end
 
+    it 'priceが空だと保存できないこと' do
+      @order_ship.price = nil
+      @order_ship.valid?
+      expect(@order_ship.errors.full_messages).to include("Price can't be blank")
+    end
+
+    it 'tokenが空だと保存できないこと' do
+      @order_ship.token = nil
+      @order_ship.valid?
+      expect(@order_ship.errors.full_messages).to include("Token can't be blank")
+    end
+
     it 'postal_codeが空だと保存できないこと' do
       @order_ship.postal_code = nil
       @order_ship.valid?

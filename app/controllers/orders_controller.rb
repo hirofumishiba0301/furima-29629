@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
-    if @item.user_id == current_user.id 
+    if !user_signed_in?
       redirect_to root_path
-    end
-    if @item.order.present?
+    elsif @item.user_id == current_user.id or @item.order.present?
       redirect_to root_path
+    else
+      @order_ship = OrderShip.new
     end
-    @order_ship = OrderShip.new
   end
 
   def new
@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @order_ship = OrderShip.new(order_ship_params)
     if @order_ship.valid?
+      pay_item
       @order_ship.save
       redirect_to root_path
     else
@@ -28,7 +29,15 @@ class OrdersController < ApplicationController
   private
 
   def order_ship_params
-    params.require(:order_ship).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:order_ship).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id], price: @item.price)
   end
 
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: order_ship_params[:price],
+      card: order_ship_params[:token],
+      currency: 'jpy'
+    )
+  end
 end

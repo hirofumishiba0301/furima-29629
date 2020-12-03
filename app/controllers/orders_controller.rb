@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     if !user_signed_in?
       redirect_to root_path
-    elsif (@item.user_id == current_user.id) || @item.order.present?
+    elsif (current_user.id == @item.user_id) || @item.order.present?
       redirect_to root_path
     else
       @order_ship = OrderShip.new
@@ -29,13 +29,13 @@ class OrdersController < ApplicationController
   private
 
   def order_ship_params
-    params.require(:order_ship).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id], price: @item.price)
+    params.require(:order_ship).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: order_ship_params[:price],
+      amount: @item.price,
       card: order_ship_params[:token],
       currency: 'jpy'
     )

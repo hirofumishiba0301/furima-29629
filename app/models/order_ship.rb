@@ -1,10 +1,10 @@
 class OrderShip
   include ActiveModel::Model
 
-  attr_accessor :price, :token, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :user_id, :item_id
+  attr_accessor :token, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :user_id, :item_id
 
   with_options presence: true do
-    validates :address, :city, :token, :price
+    validates :address, :city, :token, :user_id, :item_id
     validates :prefecture_id, numericality: { other_than: 1, message: 'must be other than 1' }
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :phone_number, length: { maximum: 11 }

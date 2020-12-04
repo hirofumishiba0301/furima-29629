@@ -6,8 +6,6 @@ FactoryBot.define do
     prefecture_id { 2 }
     phone_number { '09077777777' }
     token { 'tok_abcdefghijk00000000000000000' }
-    user_id { 1 }
-    item_id { 2 }
     building { '港ビル101号室' }
   end
 end

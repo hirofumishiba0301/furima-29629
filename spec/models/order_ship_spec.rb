@@ -3,12 +3,10 @@ require 'rails_helper'
 RSpec.describe OrderShip, type: :model do
   describe '配送先情報の保存' do
     before do
-      @order_ship = FactoryBot.build(:order_ship) do |s|
-        @user = FactoryBot.build(:user)
-        @item = FactoryBot.build(:item)
-        s.user_id = @user.id
-        s.item_id = @item.id
-      end
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @order_ship = FactoryBot.build(:order_ship, user_id: @user.id, item_id: @item.id)
+      sleep(1)
     end
 
     context '配送先情報が正しく保存できるとき' do
